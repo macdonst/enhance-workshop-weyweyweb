@@ -11,7 +11,7 @@ export default function Html ({ html, state }) {
   return html`<enhance-page-container>
   <main>
     <h1 class="mb1 font-semibold text3">Links page</h1>
-    ${links.map(item => `<article class="mb2">
+    ${links.map(item => `<article class="mb2" id="${item?.key}">
 <div class="mb0">
   <p class="pb-2"><strong class="capitalize">text: </strong>${item?.text || ''}</p>
   <p class="pb-2"><strong class="capitalize">url: </strong>${item?.url || ''}</p>
@@ -21,10 +21,7 @@ export default function Html ({ html, state }) {
 <p class="mb-1">
   <enhance-link href="/links/${item.key}">Edit this link</enhance-link>
 </p>
-<form action="/links/${item.key}/delete" method="POST" class="mb-1">
-  <enhance-submit-button><span slot="label">Delete this link</span></enhance-submit-button>
-</form>
-</article>`).join('\n')}
+<delete-button key="${item.key}"></delete-button></article>`).join('\n')}
 <details class="mb0" ${Object.keys(problems).length ? 'open' : ''}>
     <summary>New link</summary>
     <enhance-form
@@ -45,5 +42,6 @@ export default function Html ({ html, state }) {
 </details>
 </main>
 </enhance-page-container>
+<script type="module" src="/_public/browser/links.mjs"/>
   `
 }
