@@ -29,7 +29,9 @@
     }
   },
   "dependencies": {
+    "@begin/validator": "^1.0.1",
     "@enhance/arc-plugin-enhance": "^9.1.4",
+    "@enhance/form-elements": "^1.1.0",
     "@enhance/styles-cribsheet": "^0.0.9"
   }
 }
