@@ -1,14 +1,10 @@
-// View documentation at: https://enhance.dev/docs/learn/starter-project/api
-/**
-  * @typedef {import('@enhance/types').EnhanceApiFn} EnhanceApiFn
-  */
 import { getLinks, upsertLink, validate } from '../models/links.mjs'
+import { checkAuth } from '../lib/check-auth.mjs'
 
+export const get = [checkAuth,listLinks]
+export const post = [checkAuth,postLinks]
 
-/**
- * @type {EnhanceApiFn}
- */
-export async function get (req) {
+async function listLinks (req) {
   const links = await getLinks()
   if (req.session.problems) {
     let { problems, link, ...session } = req.session
@@ -23,10 +19,7 @@ export async function get (req) {
   }
 }
 
-/**
- * @type {EnhanceApiFn}
- */
-export async function post (req) {
+async function postLinks (req) {
   const session = req.session
   // Validate
   let { problems, link } = await validate.create(req)
